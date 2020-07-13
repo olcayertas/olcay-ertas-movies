@@ -45,17 +45,18 @@ interface ModalProps {
 
 function titleCase(value: string): string {
     let title = '';
-    let shouldUpcase = true;
+    let shouldUpperCase = true;
     for (let i = 0; i < value.length; i++) {
-        if (shouldUpcase) {
-            title += value[i].toUpperCase();
-            shouldUpcase = false;
-        }
         if (value[i] === ' ') {
-            shouldUpcase = true;
+            shouldUpperCase = true;
+        }
+        if (shouldUpperCase) {
+            title += value[i].toUpperCase();
+            shouldUpperCase = false;
+        } else {
+            title += value[i]
         }
     }
-
     return title;
 }
 
@@ -133,12 +134,10 @@ const Modal = ({movie, position, close}: ModalProps) => {
                 <View style={styles.content}>
                     <ScrollView>
                         <Text style={styles.paragraph}>
-                            <Text style={{fontWeight: 'bold'}}>
-                                {`${titleCase(movie.name)} `}
-                            </Text>
-                            <Text style={styles.paragraph}>
-                                {movie.description}
-                            </Text>
+                            {titleCase(movie.name)}
+                        </Text>
+                        <Text style={styles.subParagraph}>
+                            {movie.description}
                         </Text>
                     </ScrollView>
                 </View>
@@ -151,13 +150,24 @@ const Modal = ({movie, position, close}: ModalProps) => {
 };
 
 const styles = StyleSheet.create({
+    body: {
+        color: 'white',
+        fontSize: 24,
+        lineHeight: 32,
+        flex: 1,
+    },
     content: {
         padding: 16,
         flex: 1,
     },
     paragraph: {
+        fontSize: 32,
+        fontWeight: 'bold',
+        marginTop: 16,
+    },
+    subParagraph: {
         fontSize: 24,
-        marginBottom: 16,
+        marginTop: 16,
     },
 });
 

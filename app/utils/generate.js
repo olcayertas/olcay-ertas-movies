@@ -22,17 +22,14 @@ const makeMovie = (i) => {
 };
 
 const makeReview = (i) => {
-    const review = {
+    return {
         id: uuid(),
         body: reviewsData[i % reviewsData.length],
     };
-
-    return review;
 };
 
 const makeReviews = (movie, count) => {
-    const reviews = times((i) => makeReview(i), count);
-    movie.reviews = reviews;
+    movie.reviews = times((i) => makeReview(i), count);
 };
 
 const generateMovies = (moviesCount, reviewsPerMovie) => {

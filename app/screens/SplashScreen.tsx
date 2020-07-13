@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import React, {useRef, useCallback} from 'react';
 import {Animated, StatusBar, StyleSheet} from 'react-native';
-
+import moviesData from '@data/Movies';
 import generateMovies from '@utils/generate';
 
 import type Movie from '@app/types/Movie';
@@ -28,7 +28,7 @@ const Splash = () => {
             duration: 200,
             useNativeDriver: true,
         }).start(() => {
-            const movies: Array<Movie> = generateMovies(21, 5);
+            const movies: Array<Movie> = generateMovies(moviesData.length, 5);
             navigation.reset({
                 index: 0,
                 routes: [{name: 'Start', params: {movies}}],
