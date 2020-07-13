@@ -119,12 +119,7 @@ const Modal = ({movie, position, close}: ModalProps) => {
 
     return (
         <SwipeToClose y={translationY} opacity={opacity.value} {...{scale}}>
-            <Animated.View
-                style={{
-                    backgroundColor: 'white',
-                    ...p,
-                }}
-            />
+            <Animated.View style={{backgroundColor: 'white', ...p}}/>
             <Animated.View
                 style={{
                     opacity: textOpacity,
@@ -143,7 +138,7 @@ const Modal = ({movie, position, close}: ModalProps) => {
                 </View>
             </Animated.View>
             <Animated.View style={{...p, height: position.height}}>
-                <Poster movie={movie} borderRadius={borderRadius.value} />
+                <Poster movie={movie} borderRadius={borderRadius.value} modalTopPadding={40}/>
             </Animated.View>
         </SwipeToClose>
     );

@@ -7,20 +7,18 @@ import type MovieType from '@app/types/Movie';
 interface PosterProps {
     movie: MovieType;
     borderRadius?: Animated.Value<number>;
+    modalTopPadding?: number;
 }
 
-const Poster = ({borderRadius, movie}: PosterProps) => {
+const Poster = ({borderRadius, movie, modalTopPadding}: PosterProps) => {
+    const count = movie.reviews?.length || 0;
+    const style = [styles.image, {borderRadius: borderRadius || 8}];
     return (
         <>
-            <Animated.Image
-                source={{uri: movie.poster}}
-                style={[styles.image, {borderRadius: borderRadius || 8}]}
-            />
-            <View style={styles.content}>
+            <Animated.Image source={{uri: movie.poster}} style={style}/>
+            <View style={[styles.content, {paddingTop: modalTopPadding || 20}]}>
                 <Text style={styles.name}>{movie.name}</Text>
-                <Text style={styles.reviews}>{`Reviews: ${
-                    movie.reviews?.length || 0
-                }`}</Text>
+                <Text style={styles.reviews}>{`Reviews: ${count}`}</Text>
             </View>
         </>
     );
@@ -28,6 +26,8 @@ const Poster = ({borderRadius, movie}: PosterProps) => {
 
 const styles = StyleSheet.create({
     content: {
+        flexDirection: 'row',
+        alignItems: 'center',
         padding: 16,
         paddingTop: 20,
         borderRadius: 8,
@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
     },
     name: {
         color: 'white',
-        fontSize: 34,
-        lineHeight: 41,
+        fontSize: 32,
         fontWeight: 'bold',
         textShadowColor: '#000',
         textShadowOffset: {
